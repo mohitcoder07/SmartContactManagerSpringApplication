@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Home Page </title>
+  </head>
+  <body>
+     
+    <div th:insert="~{base :: layout(~{::section})}"></div>
+
+    <section class="banner d-flex justify-content-center align-items-center"> 
+     <div class="text-center"> 
+		 <h1 class="font-weight-bold">Smart Contect Manager</h1>
+		 <p>
+			 Start Collecting Your Contects In Very Smart Way.We Provide 
+			 Very efficent and Smart Way of handling contcts.
+		 </p>
+		 <button class="btn  bg-primary btn-lg text-white">Get Start</button>
+	 </div>
+    </section>
+  </body>
+</html>

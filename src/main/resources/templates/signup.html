@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Signup Page</title>
+    <!-- Include Bootstrap CSS or your custom CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+
+<div th:replace="~{base :: layout(~{::section})}">
+
+    <section th:fragment="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="my-card mt-1">
+                        <!-- Session message -->
+                        <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert alert-primary"
+                             role="alert">
+                            <p class="text-center" th:text="${session.message.content}"></p>
+                        </div>
+
+                        <!-- Registration image -->
+                        <div class="container text-center">
+                            <img style="width: 15%;" src="@{/img/registration.png}" alt=""/>
+                        </div>
+
+                        <!-- Registration form -->
+                        <h1 class="text-center">Register Here !!</h1>
+                        <form novalidate th:action="@{/do_register}" method="post" th:object="${user}">
+                            <!-- Name field -->
+                            <div class="form-group">
+                                <label for="name_field" class="form-label">Your Name</label>
+                                <input type="text" name="name" class="form-control"
+                                       th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
+                                       id="name_field" placeholder="Enter Here" required th:value="${user.name}"/>
+                                <div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}"></div>
+                            </div>
+
+                            <!-- Email field -->
+                            <div class="form-group">
+                                <label for="email_field" class="form-label">Your Email</label>
+                                <input type="email" name="email" class="form-control" id="email_field"
+                                       placeholder="Enter Here" required th:value="${user.email}"/>
+                            </div>
+
+                            <!-- Password field -->
+                            <div class="form-group">
+                                <label for="password_field" class="form-label">Your Password</label>
+                                <input type="password" name="password" class="form-control" id="password_field"
+                                       placeholder="Enter Here" required/>
+                            </div>
+
+                            <!-- About textarea -->
+                            <div class="form-group">
+                                <textarea name="about" placeholder="Enter Something About Yourself" rows="6"
+                                          class="form-control" th:value="${user.about}"></textarea>
+                            </div>
+
+                            <!-- Terms and conditions agreement -->
+                            <div class="form-group form-check">
+                                <input type="checkbox" name="agreement" class="form-check-input" id="agreement"/>
+                                <label class="form-check-label" for="agreement">Accept terms and conditions</label>
+                            </div>
+
+                            <!-- Submit and Reset buttons -->
+                            <div class="container text-center">
+                                <button type="submit" class="btn bg-primary text-white">Submit</button>
+                                <button type="reset" class="btn btn-warning text-white">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- Include Bootstrap JS or your custom scripts -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy2F+0Bn0sPPx2woKTKwYLKV4/SKw8Dk6v"
+        crossorigin="anonymous"></script>
+</body>
+</html>
